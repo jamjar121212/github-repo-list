@@ -3,16 +3,20 @@ var request = require("request");
 var chalk = require("chalk");
 
 function requestCallback(error, response, body) {
-  var data = JSON.parse(body)
+  var data = JSON.parse(body);
   if (response.statusCode === 200) {
     printURLs(data);
   } else {
-    console.log(data.message);
+    console.log("User Name: " + data.message);
   }
 };
 
 function printURLs(repos) {
-  repos.forEach(printURL);
+  if (repos.length > 0) {
+    repos.forEach(printURL);
+  } else {
+    console.log("No repositories found");
+  }
 };
 
 function printURL(repo) {
